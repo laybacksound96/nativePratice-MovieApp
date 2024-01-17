@@ -7,14 +7,15 @@ import { Ionicons } from "@expo/vector-icons";
 import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import Root from "./navigation/Root";
-import styled from "styled-components/native";
+import { ThemeProvider } from "styled-components/native";
+import { darkTheme, lightTheme } from "./theme";
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {
   const isDarkMode = useColorScheme() === "dark";
   const [assets, error] = useAssets([require("./aws_logo.png")]);
   const [fontsLoaded] = useFonts(Ionicons.font);
-
+  console.log(isDarkMode);
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded && assets) await SplashScreen.hideAsync();
   }, [fontsLoaded, assets]);
@@ -24,10 +25,12 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer theme={isDarkMode ? DarkTheme : DefaultTheme}>
-      <View onLayout={onLayoutRootView}></View>
-      <StatusBar style="auto" />
-      <Root />
-    </NavigationContainer>
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <NavigationContainer>
+        <View onLayout={onLayoutRootView}></View>
+        <StatusBar style="auto" />
+        <Root />
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }

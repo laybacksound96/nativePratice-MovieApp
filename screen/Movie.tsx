@@ -1,15 +1,19 @@
-import { Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 
 const Button = styled.TouchableOpacity`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: ${(prop) => prop.theme.mainBgColor};
+`;
+
+const Title = styled.Text`
+  color: red;
 `;
 
 const Movie = ({ navigation: { navigate } }) => (
   <Button onPress={() => navigate("Stack", { screen: "Three" })}>
-    <Text>Movie</Text>
+    <Title>Movie</Title>
   </Button>
 );
 
