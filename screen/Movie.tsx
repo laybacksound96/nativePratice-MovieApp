@@ -1,20 +1,38 @@
 import styled from "styled-components/native";
-
-const Button = styled.TouchableOpacity`
+import Swiper from "react-native-swiper";
+import { Dimensions } from "react-native";
+import { BlurView } from "expo-blur";
+const ScrollView = styled.ScrollView`
+  background-color: ${(props) => props.theme.mainBgColor};
+`;
+const Wrap = styled.View`
   flex: 1;
-  justify-content: center;
-  align-items: center;
-  background-color: ${(prop) => prop.theme.mainBgColor};
+`;
+const BgImg = styled.Image`
+  width: 100%;
+  height: 100%;
+  position: absolute;
 `;
 
-const Title = styled.Text`
-  color: red;
-`;
+const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
 const Movie = ({ navigation: { navigate } }) => (
-  <Button onPress={() => navigate("Stack", { screen: "Three" })}>
-    <Title>Movie</Title>
-  </Button>
+  <ScrollView>
+    <Swiper
+      containerStyle={{ width: "100%", height: SCREEN_HEIGHT / 4 }}
+      horizontal
+      loop
+      showsButtons={false}
+      autoplay
+      autoplayTimeout={3.5}
+      showsPagination={false}
+    >
+      <Wrap style={{ backgroundColor: "red" }}></Wrap>
+      <Wrap style={{ backgroundColor: "blue" }}></Wrap>
+      <Wrap style={{ backgroundColor: "red" }}></Wrap>
+      <Wrap style={{ backgroundColor: "blue" }}></Wrap>
+    </Swiper>
+  </ScrollView>
 );
 
 export default Movie;

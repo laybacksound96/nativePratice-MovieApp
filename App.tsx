@@ -15,7 +15,6 @@ export default function App() {
   const isDarkMode = useColorScheme() === "dark";
   const [assets, error] = useAssets([require("./aws_logo.png")]);
   const [fontsLoaded] = useFonts(Ionicons.font);
-  console.log(isDarkMode);
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded && assets) await SplashScreen.hideAsync();
   }, [fontsLoaded, assets]);
